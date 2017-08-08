@@ -1,0 +1,47 @@
+<h1 class="text-center">Listando Contas</h1>
+
+<div class="col-md-12">
+
+  <div class="col-md-4 col-md-offset-4">
+
+    <%= link_to new_account_path, class: "btn btn-primary" do %>
+
+      <span class="glyphicon glyphicon-plus"></span>
+      Novo
+
+    <% end %>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Descrição</th>
+          <th>Tipo da Conta</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @accounts.each do |account| %>
+        <tr>
+          <td><%= account.id %></td>
+          <td><%= account.description %></td>
+          <td><%= account.account_type %></td>
+          <td>
+            <%= link_to edit_account_path(account), class: "btn btn-xs btn-warning" do %>
+
+              <span class="glyphicon glyphicon-pencil"></span>
+
+            <% end %>
+
+            <%= link_to account_path(account), class: "btn btn-xs btn-danger", method: :delete, data: { confirm: "Excluir #{account.description}" } do %>
+
+              <span class="glyphicon glyphicon-remove"></span>
+
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>
