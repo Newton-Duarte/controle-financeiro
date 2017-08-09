@@ -1,2 +1,11 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<h1 class="text-center">Controle Financeiro</h1>
+
+<div class="col-md-12">
+  <div class="text-center">
+    <ul style="list-style: none;">
+      <li style="padding: 5px 0;"><%= link_to "Lançamentos", entries_path, class: "btn btn-default" %></li>
+      <li style="padding: 5px 0;"><%= link_to "Contas", accounts_path, class: "btn btn-default" %></li>
+      <li style="padding: 5px 0;"><%= link_to "Categorias", categories_path, class: "btn btn-default" %></li>
+    </ul>
+  </div>
+</div>

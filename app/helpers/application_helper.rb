@@ -5,17 +5,26 @@ module ApplicationHelper
     "Despesa"
   ]
 
-  CUSTOMER_TYPE = [
+  PERSON_TYPE = [
     "Física",
     "Jurídica"
+  ]
+
+  ENTRY_TYPE = [
+    "Despesa",
+    "Receita"
   ]
 
   def options_for_account_types(select)
     options_for_select(ACCOUNT_TYPE, select)
   end
 
-  def options_for_customer_types(select)
-    options_for_select(CUSTOMER_TYPE, select)
+  def options_for_entry_types(select)
+    options_for_select(ENTRY_TYPE, select)
+  end
+
+  def options_for_person_types(select)
+    options_for_select(PERSON_TYPE, select)
   end
 
 end

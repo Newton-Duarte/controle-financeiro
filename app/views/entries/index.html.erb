@@ -1,0 +1,69 @@
+<h1 class="text-center">Listando Lançamentos</h1>
+
+<div class="col-md-12">
+
+  <div class="col-md-8 col-md-offset-2">
+
+    <%= link_to new_entry_path, class: "btn btn-primary" do %>
+
+      <span class="glyphicon glyphicon-plus"></span>
+      Novo
+
+    <% end %>
+
+    <div class="pull-right alert-warning" style="padding: 10px;">
+      <p class="alert-danger lead">Total a Pagar: R$ -<%= @entries_amount_to_pay %>,00</p>
+      <p class="alert-danger lead">Total Pago: R$ -<%= @entries_amount_paid %>,00</p>
+      <p class="alert-success lead">Total a Receber: R$ <%= @entries_amount_to_receive %>,00</p>
+      <p class="alert-success lead">Total Recebido: R$ <%= @entries_amount_received %>,00</p>
+      <p class="alert-info lead">Saldo: R$ <%= @entries_saldo %>,00</p>
+    </div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Descrição</th>
+          <th>Tipo</th>
+          <th>Valor</th>
+          <th>Vencimento</th>
+          <th>Conta</th>
+          <th>Categoria</th>
+          <th>Status</th>
+          <th>Obs</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @entries.each do |entry| %>
+        <tr>
+          <td><%= entry.id %></td>
+          <td><%= entry.description %></td>
+          <td><%= entry.entry_type %></td>
+          <td><%= entry.amount %></td>
+          <td><%= entry.date %></td>
+          <td><%= entry.account.description %></td>
+          <td><%= entry.category.description %></td>
+          <td><%= entry.status %></td>
+          <td><%= entry.obs %></td>
+          <td>
+            <%= link_to edit_entry_path(entry), class: "btn btn-xs btn-warning" do %>
+
+              <span class="glyphicon glyphicon-pencil"></span>
+
+            <% end %>
+
+            <%= link_to entry_path(entry), class: "btn btn-xs btn-danger", method: :delete, data: { confirm: "Excluir #{entry.description}" } do %>
+
+              <span class="glyphicon glyphicon-remove"></span>
+
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <%= link_to "Voltar", root_path, class: "btn btn-danger" %>
+
+  </div>
+</div>

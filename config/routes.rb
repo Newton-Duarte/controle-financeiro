@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'entries/index'
+
+  get 'categories/index'
+
   get 'home/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -9,6 +13,9 @@ Rails.application.routes.draw do
 
   resources :accounts
   resources :customers
+  resources :providers
+  resources :categories
+  resources :entries
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

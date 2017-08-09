@@ -1,0 +1,51 @@
+<h1 class="text-center">Listando Fornecedores</h1>
+
+<div class="col-md-12">
+
+  <div class="col-md-6 col-md-offset-3">
+
+    <%= link_to new_provider_path, class: "btn btn-primary" do %>
+
+      <span class="glyphicon glyphicon-plus"></span>
+      Novo
+
+    <% end %>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nome/Razão Social</th>
+          <th>Apelido/Fantasia</th>
+          <th>CPF/CNPJ</th>
+          <th>Tipo de Pessoa</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @providers.each do |provider| %>
+        <tr>
+          <td><%= provider.id %></td>
+          <td><%= provider.nome_razao_social %></td>
+          <td><%= provider.apelido_fantasia %></td>
+          <td><%= provider.cpf_cnpj %></td>
+          <td><%= provider.provider_type %></td>
+          <td>
+            <%= link_to edit_provider_path(provider), class: "btn btn-xs btn-warning" do %>
+
+              <span class="glyphicon glyphicon-pencil"></span>
+
+            <% end %>
+
+            <%= link_to provider_path(provider), class: "btn btn-xs btn-danger", method: :delete, data: { confirm: "Excluir #{provider.nome_razao_social}" } do %>
+
+              <span class="glyphicon glyphicon-remove"></span>
+
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>
