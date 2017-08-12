@@ -3,7 +3,7 @@ class CreateEntries < ActiveRecord::Migration
     create_table :entries do |t|
       t.string :description
       t.string :entry_type
-      t.integer :amount
+      t.float :value, default: 0.00
       t.date :date
       t.references :account, index: true, foreign_key: true
       t.references :category, index: true, foreign_key: true

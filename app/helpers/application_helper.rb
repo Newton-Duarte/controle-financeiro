@@ -1,9 +1,4 @@
 module ApplicationHelper
-  ACCOUNT_TYPE = [
-    "Financeira",
-    "Receita",
-    "Despesa"
-  ]
 
   PERSON_TYPE = [
     "Física",
@@ -14,10 +9,6 @@ module ApplicationHelper
     "Despesa",
     "Receita"
   ]
-
-  def options_for_account_types(select)
-    options_for_select(ACCOUNT_TYPE, select)
-  end
 
   def options_for_entry_types(select)
     options_for_select(ENTRY_TYPE, select)

@@ -1,69 +1,62 @@
 <h1 class="text-center">Listando Lançamentos</h1>
 
-<div class="col-md-12">
 
-  <div class="col-md-8 col-md-offset-2">
+<%= link_to new_entry_path, class: "btn btn-primary" do %>
 
-    <%= link_to new_entry_path, class: "btn btn-primary" do %>
+  <span class="glyphicon glyphicon-plus"></span>
+  Novo
 
-      <span class="glyphicon glyphicon-plus"></span>
-      Novo
+<% end %>
 
-    <% end %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Descrição</th>
+      <th>Tipo</th>
+      <th>Valor</th>
+      <th>Vencimento</th>
+      <th>Conta</th>
+      <th>Categoria</th>
+      <th>Status</th>
+      <th>Observações</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @entries.each do |entry| %>
+    <tr>
+      <td><%= entry.id %></td>
+      <td><%= entry.description %></td>
+      <td><span class="label label-<%= entry.entry_type == "Despesa" ? "danger" : "success" %>"><%= entry.entry_type %></span></td>
+      <td><%= entry.value %></td>
+      <td><%= (l(entry.date) unless entry.date.blank?) %></td>
+      <td><%= entry.account.description %></td>
+      <td><%= entry.category.description %></td>
+      <td><span class="label label-<%= entry.status == "Pendente" ? "warning" : "primary" %>"><%= entry.status %></span></td>
+      <td><%= entry.obs %></td>
+      <td>
+        <%= link_to edit_entry_path(entry), class: "btn btn-xs btn-warning" do %>
 
-    <div class="pull-right alert-warning" style="padding: 10px;">
-      <p class="alert-danger lead">Total a Pagar: R$ -<%= @entries_amount_to_pay %>,00</p>
-      <p class="alert-danger lead">Total Pago: R$ -<%= @entries_amount_paid %>,00</p>
-      <p class="alert-success lead">Total a Receber: R$ <%= @entries_amount_to_receive %>,00</p>
-      <p class="alert-success lead">Total Recebido: R$ <%= @entries_amount_received %>,00</p>
-      <p class="alert-info lead">Saldo: R$ <%= @entries_saldo %>,00</p>
-    </div>
+          <span class="glyphicon glyphicon-pencil"></span>
 
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Descrição</th>
-          <th>Tipo</th>
-          <th>Valor</th>
-          <th>Vencimento</th>
-          <th>Conta</th>
-          <th>Categoria</th>
-          <th>Status</th>
-          <th>Obs</th>
-        </tr>
-      </thead>
-      <tbody>
-      <% @entries.each do |entry| %>
-        <tr>
-          <td><%= entry.id %></td>
-          <td><%= entry.description %></td>
-          <td><%= entry.entry_type %></td>
-          <td><%= entry.amount %></td>
-          <td><%= entry.date %></td>
-          <td><%= entry.account.description %></td>
-          <td><%= entry.category.description %></td>
-          <td><%= entry.status %></td>
-          <td><%= entry.obs %></td>
-          <td>
-            <%= link_to edit_entry_path(entry), class: "btn btn-xs btn-warning" do %>
+        <% end %>
 
-              <span class="glyphicon glyphicon-pencil"></span>
+        <%= link_to entry_path(entry), class: "btn btn-xs btn-danger", method: :delete, data: { confirm: "Excluir #{entry.description}?" } do %>
 
-            <% end %>
+          <span class="glyphicon glyphicon-remove"></span>
 
-            <%= link_to entry_path(entry), class: "btn btn-xs btn-danger", method: :delete, data: { confirm: "Excluir #{entry.description}" } do %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
 
-              <span class="glyphicon glyphicon-remove"></span>
-
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-
-    <%= link_to "Voltar", root_path, class: "btn btn-danger" %>
-
-  </div>
+<%= link_to "Voltar", root_path, class: "btn btn-danger" %>
+<div class="container footer text-center">
+  <span class="text-danger"><b>Total a Pagar:</b> R$ -<%= @entries_value_to_pay %></span>
+  <span class="text-danger"><b>Total Pago:</b> R$ -<%= @entries_value_paid %></span>
+  <span class="text-success"><b>Total a Receber:</b> R$ <%= @entries_value_to_receive %></span>
+  <span class="text-success"><b>Total Recebido:</b> R$ <%= @entries_value_received %></span>
+  <span class="text-primary"><b>Saldo:</b> R$ <%= @entries_balance %></span>
 </div>

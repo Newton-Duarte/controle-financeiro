@@ -2,13 +2,24 @@
 <html>
 <head>
   <title>ControleFinanceiro</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<%= render partial: "layouts/shared/navigation" %>
 
+
+<div class="container">
+  <div class="col-lg-12">
+    <%= yield %>
+  </div>
+</div>
+
+<%= javascript_include_tag 'application' %>
+<%= javascript_include_tag 'entries' %>
+
+<%= yield :javascripts %>
 </body>
 </html>

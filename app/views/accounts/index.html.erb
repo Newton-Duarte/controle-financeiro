@@ -16,7 +16,7 @@
         <tr>
           <th>#</th>
           <th>Descrição</th>
-          <th>Tipo da Conta</th>
+          <th>Saldo</th>
         </tr>
       </thead>
       <tbody>
@@ -24,7 +24,7 @@
         <tr>
           <td><%= account.id %></td>
           <td><%= account.description %></td>
-          <td><%= account.account_type %></td>
+          <td><%= account.balance %></td>
           <td>
             <%= link_to edit_account_path(account), class: "btn btn-xs btn-warning" do %>
 
@@ -32,7 +32,7 @@
 
             <% end %>
 
-            <%= link_to account_path(account), class: "btn btn-xs btn-danger", method: :delete, data: { confirm: "Excluir #{account.description}" } do %>
+            <%= link_to account_path(account), class: "btn btn-xs btn-danger", method: :delete, data: { confirm: "Excluir #{account.description}?" } do %>
 
               <span class="glyphicon glyphicon-remove"></span>
 

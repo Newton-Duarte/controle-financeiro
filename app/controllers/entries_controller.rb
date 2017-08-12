@@ -6,11 +6,12 @@ class EntriesController < ApplicationController
 
   def index
     @entries = Entry.all
-    @entries_amount_to_pay = Entry.total_amount_to_pay
-    @entries_amount_paid = Entry.total_amount_paid
-    @entries_amount_to_receive = Entry.total_amount_to_receive
-    @entries_amount_received = Entry.total_amount_received
-    @entries_saldo = (Entry.total_amount_received - Entry.total_amount_paid)
+    @entries_group_by_category = Entry.group_by_category
+    @entries_value_to_pay = Entry.total_value_to_pay
+    @entries_value_paid = Entry.total_value_paid
+    @entries_value_to_receive = Entry.total_value_to_receive
+    @entries_value_received = Entry.total_value_received
+    @entries_balance = (@entries_value_received - @entries_value_paid).round(2)
   end
 
   def new
@@ -51,6 +52,21 @@ class EntriesController < ApplicationController
 
   private
 
+  # def update_account_balance!
+  #   account = Account.find(@entry.account_id)
+
+  #   if @entry.entry_type == "Despesa" && @entry.status == "Finalizado"
+  #     account.balance -= @entry.value
+  #     account.save!
+  #   elsif @entry.entry_type == "Receita" && @entry.status == "Finalizado"
+  #     account.balance += @entry.value
+  #     account.save!
+  #   else
+  #     #
+  #   end
+
+  # end
+
   def set_account_options_for_select
     @account_options_for_select = Account.all
   end
@@ -64,6 +80,6 @@ class EntriesController < ApplicationController
   end
 
   def params_entry
-    params.require(:entry).permit(:id, :description, :entry_type, :amount, :date, :account_id, :category_id, :obs, :status)
+    params.require(:entry).permit(:id, :description, :entry_type, :value, :date, :account_id, :category_id, :obs, :status)
   end
 end

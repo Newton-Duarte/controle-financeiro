@@ -23,12 +23,11 @@
   <div class="form-group">
     <div class="row">
       <div class="col-md-4 col-md-offset-4">
-        <%= f.label :account_type %>
-        <%= f.select :account_type, options_for_account_types(@account.account_type), {}, class: "form-control" %>
+        <%= f.label :balance %>
+        <%= f.text_field :balance, class: "form-control", placeholder: "Saldo da conta" %>
       </div>
     </div>
   </div>
-
 
   <div class="text-center">
     <%= link_to "Voltar", accounts_path, class: "btn btn-danger" %>

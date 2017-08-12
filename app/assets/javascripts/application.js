@@ -12,4 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/widgets/datepicker
+//= require jquery-ui/i18n/datepicker-pt-BR
+//= require bootstrap
 //= require_tree .
