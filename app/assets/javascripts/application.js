@@ -14,5 +14,5 @@
 //= require jquery_ujs
 //= require jquery-ui/widgets/datepicker
 //= require jquery-ui/i18n/datepicker-pt-BR
-//= require bootstrap
+//= require bootstrap_sb_admin_base_v2
 //= require_tree .

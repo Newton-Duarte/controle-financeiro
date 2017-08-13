@@ -2,13 +2,13 @@
 
 <div class="col-md-6">
 
-  <div class="box">
+  <div class="box box-1">
     <div class="box-content text-center">
       <div class="hello-box">
-        <p>Boa noite, Fulano!</p>
+        <p>Olá, Newton!</p>
       </div>
       <div class="info-text">
-        <i>R$</i> 2.500,00
+        <span>R$</span> <%= @accounts.sum(:balance) %>
       </div>
       <p>Saldo geral</p>
     </div>
@@ -18,7 +18,7 @@
 
 <div class="col-md-6">
 
-  <div class="box">
+  <div class="box box-2">
     <div class="box-content text-center">
       <div class="acesso-rapido-box">
         <p>Acesso rápido</p>
@@ -26,16 +26,22 @@
       <div class="acesso-rapido-acoes">
         <ul>
           <li>
-            <a href="#" class="receita">
+            <%= link_to new_entry_path(:entry_type => "Receita"), class: "receita" do %>
               <span class="glyphicon glyphicon-plus-sign"></span>
               Receita
-            </a>
+            <% end %>
           </li>
           <li>
-            <a href="#" class="despesa">
-              <span class="glyphicon glyphicon-plus-sign"></span>
+            <%= link_to new_entry_path(:entry_type => "Despesa"), class: "despesa" do %>
+              <span class="glyphicon glyphicon-minus-sign"></span>
               Despesa
-            </a>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to new_transference_path, class: "transfer" do %>
+              <span class="glyphicon glyphicon-transfer"></span>
+              Transfer.
+            <% end %>
           </li>
         </ul>
       </div>
@@ -46,21 +52,19 @@
 
 <div class="col-md-6">
 
-  <div class="box">
+  <div class="box box-3">
     <div class="box-content">
       <div class="minhas-contas-box">
         <p>Minhas contas</p>
       </div>
       <div class="minhas-contas">
         <ul>
-          <li>
-            <span>Carteira</span>
-            <span>R$ -10,00</span>
-          </li>
-          <li>
-            <span>C.E.F 30676-1</span>
-            <span>R$ 2.000,00</span>
-          </li>
+          <% @accounts.each do |account| %>
+            <li>
+              <span><%= account.description %></span>
+              <span class="valor pull-right">R$ <%= account.balance %></span>
+            </li>
+          <% end %>
         </ul>
       </div>
     </div>
@@ -70,28 +74,84 @@
 
 <div class="col-md-6">
 
-  <div class="box">
+  <div class="box box-4">
     <div class="box-content">
-      <div class="minhas-contas-box">
+      <div class="categorias-box">
         <p>Lançamentos por categorias</p>
       </div>
-      <div class="minhas-contas">
+      <div class="categorias">
         <ul>
-          <li>
-            <span>Salário</span>
-            <span>R$ 2.000,00</span>
-          </li>
-          <li>
-            <span>Alimentação</span>
-            <span>R$ 200,00</span>
-          </li>
-          <li>
-            <span>Saídas</span>
-            <span>R$ 250,00</span>
-          </li>
+          <% @entries_by_category.each do |category, total| %>
+            <li>
+              <span><%= category.description %></span>
+              <span class="valor pull-right">R$ <%= total %></span>
+            </li>
+          <% end %>
+          <% if @entries_by_category.blank? %>
+            <li class="text-center">
+              <span>Você não possui nenhum lançamento.</span>
+            </li>
+          <% end %>
         </ul>
       </div>
     </div>
   </div>
 
 </div>
+
+<div class="col-md-6">
+
+  <div class="box box-5">
+    <div class="box-content">
+      <div class="contas-receber-box">
+        <p>Contas a receber</p>
+      </div>
+      <div class="contas-receber">
+        <ul>
+          <% @entries_to_receive.each do |bills_to_receive| %>
+            <li>
+              <span class="descricao"><%= bills_to_receive.description %></span>
+              <span class="valor pull-right">R$ <%= bills_to_receive.value %></span>
+              <span class="vencimento">R$ <%= l(bills_to_receive.date) %></span>
+            </li>
+          <% end %>
+          <% if @entries_to_receive.blank? %>
+            <li class="text-center">
+              Você não possui contas a receber pendentes.
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="col-md-6">
+
+  <div class="box box-6">
+    <div class="box-content">
+      <div class="contas-pagar-box">
+        <p>Contas a pagar</p>
+      </div>
+      <div class="contas-pagar">
+        <ul>
+          <% @entries_to_pay.each do |bills_to_pay| %>
+            <li>
+              <span class="descricao"><%= bills_to_pay.description %></span>
+              <span class="valor pull-right">R$ -<%= bills_to_pay.value %></span>
+              <span class="vencimento">R$ <%= l(bills_to_pay.date) %></span>
+            </li>
+          <% end %>
+          <% if @entries_to_pay.blank? %>
+            <li class="text-center">
+              <span>Você não possui contas a pagar pendentes.</span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+

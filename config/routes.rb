@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'transferences/index'
+
   get 'entries/index'
 
   get 'categories/index'
@@ -16,6 +18,7 @@ Rails.application.routes.draw do
   resources :providers
   resources :categories
   resources :entries
+  resources :transferences
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

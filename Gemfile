@@ -12,6 +12,7 @@ gem 'money-rails'
 gem 'jquery-ui-rails'
 gem 'kaminari'
 gem 'kaminari-i18n'
+gem 'bootstrap_sb_admin_base_v2'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

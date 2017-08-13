@@ -1,12 +1,34 @@
 <h1 class="text-center">Listando Lançamentos</h1>
 
 
-<%= link_to new_entry_path, class: "btn btn-primary" do %>
+<ul>
+  <li class="dropdown">
+    <a class="dropdown-toggle btn btn-primary" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+      Lançamentos <span class="glyphicon glyphicon-plus-sign"></span>
+    </a>
+    <ul class="dropdown-menu lancamentos">
+      <li>
+        <%= link_to new_entry_path(:entry_type => "Receita"), class: "receita" do %>
+          <span class="glyphicon glyphicon-plus-sign"></span>
+          Receita
+        <% end %>
+      </li>
+      <li>
+        <%= link_to new_entry_path(:entry_type => "Despesa"), class: "despesa" do %>
+          <span class="glyphicon glyphicon-minus-sign"></span>
+          Despesa
+        <% end %>
+      </li>
+      <li>
+        <%= link_to new_transference_path, class: "transfer" do %>
+          <span class="glyphicon glyphicon-transfer"></span>
+          Transferências
+        <% end %>
+      </li>
+    </ul>
+  </li>
+</ul>
 
-  <span class="glyphicon glyphicon-plus"></span>
-  Novo
-
-<% end %>
 
 <table class="table table-striped">
   <thead>
@@ -28,16 +50,29 @@
       <td><%= entry.id %></td>
       <td><%= entry.description %></td>
       <td><span class="label label-<%= entry.entry_type == "Despesa" ? "danger" : "success" %>"><%= entry.entry_type %></span></td>
-      <td><%= entry.value %></td>
+      <td><%= entry.entry_type == "Despesa" ? "-" : "" %><%= entry.value %></td>
       <td><%= (l(entry.date) unless entry.date.blank?) %></td>
       <td><%= entry.account.description %></td>
       <td><%= entry.category.description %></td>
       <td><span class="label label-<%= entry.status == "Pendente" ? "warning" : "primary" %>"><%= entry.status %></span></td>
       <td><%= entry.obs %></td>
       <td>
-        <%= link_to edit_entry_path(entry), class: "btn btn-xs btn-warning" do %>
 
-          <span class="glyphicon glyphicon-pencil"></span>
+        <% if entry.status == 'Pendente' %>
+
+          <%= link_to edit_entry_path(entry), class: "btn btn-xs btn-info" do %>
+
+            <span class="glyphicon glyphicon-pencil"></span>
+
+          <% end %>
+
+        <% else %>
+
+          <%= link_to "", class: "btn btn-xs btn-info", disabled: "disabled" do %>
+
+            <span class="glyphicon glyphicon-pencil"></span>
+
+          <% end %>
 
         <% end %>
 
@@ -52,7 +87,10 @@
   </tbody>
 </table>
 
-<%= link_to "Voltar", root_path, class: "btn btn-danger" %>
+<div class="text-center">
+  <%= paginate @entries %>
+</div>
+
 <div class="container footer text-center">
   <span class="text-danger"><b>Total a Pagar:</b> R$ -<%= @entries_value_to_pay %></span>
   <span class="text-danger"><b>Total Pago:</b> R$ -<%= @entries_value_paid %></span>

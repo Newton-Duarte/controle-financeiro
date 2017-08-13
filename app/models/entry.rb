@@ -19,6 +19,14 @@ class Entry < ActiveRecord::Base
     where(:entry_type => 'Receita', :status => 'Pendente').sum(:value)
   }
 
+  scope :bills_to_receive, -> {
+    where(:entry_type => 'Receita', :status => 'Pendente').order(:date)
+  }
+
+  scope :bills_to_pay, -> {
+    where(:entry_type => 'Despesa', :status => 'Pendente').order(:date)
+  }
+
   scope :total_value_received, -> {
     where(:entry_type => 'Receita', :status => 'Finalizado').sum(:value)
   }

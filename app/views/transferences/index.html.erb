@@ -1,0 +1,48 @@
+<h1 class="text-center">Listando Transferências</h1>
+
+<%= link_to new_transference_path, class: "btn btn-primary" do %>
+
+  <span class="glyphicon glyphicon-transfer"></span>
+  Transfer.
+
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Data</th>
+      <th>Valor</th>
+      <th>Conta debitada</th>
+      <th>Conta creditada</th>
+      <th>Observações</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @transferences.each do |transference| %>
+    <tr>
+      <td><%= transference.id %></td>
+      <td><%= l(transference.date) %></td>
+      <td><%= transference.amount%></td>
+      <td><%= get_account_description(transference.debit_account) %></td>
+      <td><%= get_account_description(transference.credit_account) %></td>
+      <td><%= transference.obs %></td>
+      <td>
+        <%= link_to edit_transference_path(transference), class: "btn btn-xs btn-warning" do %>
+
+          <span class="glyphicon glyphicon-pencil"></span>
+
+        <% end %>
+
+        <%= link_to transference_path(transference), class: "btn btn-xs btn-danger", method: :delete, data: { confirm: "Excluir #{transference.id}?" } do %>
+
+          <span class="glyphicon glyphicon-remove"></span>
+
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Voltar", root_path, class: "btn btn-danger" %>

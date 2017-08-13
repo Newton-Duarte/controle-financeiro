@@ -18,4 +18,9 @@ module ApplicationHelper
     options_for_select(PERSON_TYPE, select)
   end
 
+  def get_account_description(account)
+    account = Account.find(account)
+    account.description
+  end
+
 end
