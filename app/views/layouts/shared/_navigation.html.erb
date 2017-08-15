@@ -31,6 +31,20 @@
           Relatórios
         <% end %>
       </li>
+      <li>
+        <% if user_signed_in? %>
+          <%= link_to edit_profile_path(current_user.id) do %>
+            <span class="glyphicon glyphicon-user"></span>
+            Perfil
+          <% end %>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to destroy_user_session_path, method: :delete do %>
+          <span class="glyphicon glyphicon-log-out"></span>
+          Sair
+        <% end %>
+      </li>
     </ul>
 
     <!-- <ul class="nav navbar-nav navbar-right">

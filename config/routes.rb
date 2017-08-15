@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
+
   get 'transferences/index'
 
   get 'entries/index'
@@ -19,6 +25,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :entries
   resources :transferences
+  resources :profiles, only: [:edit, :update]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

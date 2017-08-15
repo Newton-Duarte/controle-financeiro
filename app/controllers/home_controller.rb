@@ -1,4 +1,7 @@
 class HomeController < ApplicationController
+
+  before_action :authenticate_user!
+
   def index
     @accounts = Account.limit(3)
     @entries_by_category = Entry.limit(3).group_by_category

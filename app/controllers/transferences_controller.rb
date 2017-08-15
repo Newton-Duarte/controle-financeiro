@@ -1,5 +1,6 @@
 class TransferencesController < ApplicationController
 
+  before_action :authenticate_user!
   before_action :set_account_options_for_select, only: [:new, :edit, :create, :update]
   before_action :set_transference, only: [:edit, :update, :destroy]
 

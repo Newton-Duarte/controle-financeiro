@@ -1,5 +1,6 @@
 class EntriesController < ApplicationController
 
+  before_action :authenticate_user!
   before_action :set_entry, only: [:edit, :update, :destroy]
   before_action :set_account_options_for_select, only: [:new, :edit, :create, :update]
   before_action :set_category_options_for_select, only: [:new, :edit, :create, :update]
