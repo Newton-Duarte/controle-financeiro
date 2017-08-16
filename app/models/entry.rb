@@ -3,8 +3,6 @@ class Entry < ActiveRecord::Base
   belongs_to :account
   belongs_to :category
 
-  attr_accessor :accounts
-
   # monetize :value_cents
 
   scope :total_value_to_pay, -> {
