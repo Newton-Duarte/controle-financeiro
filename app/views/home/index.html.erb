@@ -5,7 +5,7 @@
   <div class="box box-1">
     <div class="box-content text-center">
       <div class="hello-box">
-        <p>Olá, <%= current_user.user_profile.first_name if current_user.user_profile.first_name? %></p>
+        <p>Olá, <%= current_user.user_profile.first_name %></p>
       </div>
       <div class="info-text">
         <span>R$</span> <%= @accounts.sum(:balance) %>

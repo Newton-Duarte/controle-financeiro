@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     :sign_up,
     keys: [
       :email, :password, :password_confirmation,
-      :profile_user_attributes => [:first_name, :last_name]
+      :user_profile_attributes => [:first_name, :last_name]
     ]
   )
  end

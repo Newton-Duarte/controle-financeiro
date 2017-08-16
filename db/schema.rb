@@ -26,15 +26,6 @@ ActiveRecord::Schema.define(version: 20170815004402) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "customers", force: :cascade do |t|
-    t.string   "customer_type"
-    t.string   "cpf_cnpj"
-    t.string   "nome_razao_social"
-    t.string   "apelido_fantasia"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-  end
-
   create_table "entries", force: :cascade do |t|
     t.string   "description"
     t.string   "entry_type"
@@ -50,15 +41,6 @@ ActiveRecord::Schema.define(version: 20170815004402) do
 
   add_index "entries", ["account_id"], name: "index_entries_on_account_id"
   add_index "entries", ["category_id"], name: "index_entries_on_category_id"
-
-  create_table "providers", force: :cascade do |t|
-    t.string   "provider_type"
-    t.string   "cpf_cnpj"
-    t.string   "nome_razao_social"
-    t.string   "apelido_fantasia"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-  end
 
   create_table "transferences", force: :cascade do |t|
     t.date     "date"
