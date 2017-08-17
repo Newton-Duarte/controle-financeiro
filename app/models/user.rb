@@ -1,7 +1,12 @@
 class User < ActiveRecord::Base
 
+  after_create :create_accounts
+
   # Associations
   has_one :user_profile
+  has_many :accounts
+  has_many :entries
+  has_many :transferences
   accepts_nested_attributes_for :user_profile
 
   # Validations
@@ -21,6 +26,22 @@ class User < ActiveRecord::Base
 
   def nested_attributes_blank?
     user_profile.first_name.blank? || user_profile.last_name.blank?
+  end
+
+  def create_accounts
+    @user = User.last
+    @account = Account.new
+    @account.description = "Tesouraria"
+    @account.balance = 0.00
+    @account.user = @user
+    @account.save
+
+    @user = User.last
+    @account = Account.new
+    @account.description = "Banco"
+    @account.balance = 0.00
+    @account.user = @user
+    @account.save
   end
 
 end

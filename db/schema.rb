@@ -11,14 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170815004402) do
+ActiveRecord::Schema.define(version: 20170817013734) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "description"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.float    "balance",     default: 0.0
+    t.integer  "user_id"
   end
+
+  add_index "accounts", ["user_id"], name: "index_accounts_on_user_id"
 
   create_table "categories", force: :cascade do |t|
     t.string   "description"
@@ -37,20 +40,25 @@ ActiveRecord::Schema.define(version: 20170815004402) do
     t.string   "status"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "user_id"
   end
 
   add_index "entries", ["account_id"], name: "index_entries_on_account_id"
   add_index "entries", ["category_id"], name: "index_entries_on_category_id"
+  add_index "entries", ["user_id"], name: "index_entries_on_user_id"
 
   create_table "transferences", force: :cascade do |t|
     t.date     "date"
-    t.float    "amount"
+    t.float    "amount",         default: 0.0
     t.integer  "debit_account"
     t.integer  "credit_account"
     t.text     "obs"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "user_id"
   end
+
+  add_index "transferences", ["user_id"], name: "index_transferences_on_user_id"
 
   create_table "user_profiles", force: :cascade do |t|
     t.string   "first_name"

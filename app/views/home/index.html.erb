@@ -8,7 +8,7 @@
         <p>Olá, <%= current_user.user_profile.first_name %></p>
       </div>
       <div class="info-text">
-        <span>R$</span> <%= @accounts.sum(:balance) %>
+        <span>R$</span> <%= @accounts.sum(:balance).round(2) %>
       </div>
       <p>Saldo geral</p>
     </div>
@@ -62,7 +62,12 @@
           <% @accounts.each do |account| %>
             <li>
               <span><%= account.description %></span>
-              <span class="valor pull-right">R$ <%= account.balance %></span>
+              <span class="valor pull-right">R$ <%= account.balance.round(2) %></span>
+            </li>
+          <% end %>
+          <% if @accounts.blank? %>
+            <li class="text-center">
+              <span>Você não possui nenhuma conta cadastrada.</span>
             </li>
           <% end %>
         </ul>

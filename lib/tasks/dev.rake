@@ -10,7 +10,7 @@ namespace :dev do
     puts  %x(rake db:migrate)
     puts  %x(rake db:seed)
     puts  %x(rake dev:generate_categories)
-    puts  %x(rake dev:generate_accounts)
+    # puts  %x(rake dev:generate_accounts)
 
     puts "Setup desenvolvimento concluído com sucesso!"
 
@@ -37,17 +37,17 @@ namespace :dev do
 
   end
 
-  desc "Cria contas"
-  task generate_accounts: :environment do
+  # desc "Cria contas"
+  # task generate_accounts: :environment do
 
-    puts "Criando contas..."
+  #   puts "Criando contas..."
 
-    Account.create!(description:  "Carteira", balance: 0.00)
-    Account.create!(description:  "C.E.F 30676-1", balance: 0.00)
+  #   Account.create!(description:  "Tesouraria", balance: 0.00)
+  #   Account.create!(description:  "Banco", balance: 0.00)
 
-    puts "Contas criadas com sucesso!"
+  #   puts "Contas criadas com sucesso!"
 
 
-  end
+  # end
 
 end

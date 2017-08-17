@@ -6,12 +6,12 @@ class EntriesController < ApplicationController
   before_action :set_category_options_for_select, only: [:new, :edit, :create, :update]
 
   def index
-    @entries = Entry.page(params[:page]).per(10)
-    @entries_group_by_category = Entry.group_by_category
-    @entries_value_to_pay = Entry.total_value_to_pay
-    @entries_value_paid = Entry.total_value_paid
-    @entries_value_to_receive = Entry.total_value_to_receive
-    @entries_value_received = Entry.total_value_received
+    @entries = Entry.page(params[:page]).per(10).by_user(current_user)
+    @entries_group_by_category = Entry.group_by_category(current_user)
+    @entries_value_to_pay = Entry.total_value_to_pay(current_user)
+    @entries_value_paid = Entry.total_value_paid(current_user)
+    @entries_value_to_receive = Entry.total_value_to_receive(current_user)
+    @entries_value_received = Entry.total_value_received(current_user)
     @entries_balance = (@entries_value_received - @entries_value_paid).round(2)
   end
 
@@ -21,6 +21,7 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.new(params_entry)
+    @entry.user = current_user
 
     if @entry.save
       update_account_balance!

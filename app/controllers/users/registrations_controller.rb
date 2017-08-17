@@ -1,16 +1,16 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
- before_filter :configure_permitted_parameters
+  before_filter :configure_permitted_parameters
 
- def new
+  def new
   build_resource({})
   resource.build_user_profile
   respond_with self.resource
- end
+  end
 
- protected
+  protected
 
- def configure_permitted_parameters
+  def configure_permitted_parameters
   devise_parameter_sanitizer.permit(
     :sign_up,
     keys: [
@@ -18,6 +18,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       :user_profile_attributes => [:first_name, :last_name]
     ]
   )
- end
+  end
 
 end

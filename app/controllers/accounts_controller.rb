@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
   before_action :set_account, only: [:edit, :update, :destroy]
 
   def index
-    @accounts = Account.all
+    @accounts = Account.by_user(current_user)
   end
 
   def new
@@ -13,6 +13,7 @@ class AccountsController < ApplicationController
 
   def create
     @account = Account.new(params_account)
+    @account.user = current_user
 
     if @account.save
       redirect_to accounts_path, notice: "Conta criada com sucesso!"

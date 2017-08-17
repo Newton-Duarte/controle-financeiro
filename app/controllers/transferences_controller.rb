@@ -14,6 +14,7 @@ class TransferencesController < ApplicationController
 
   def create
     @transference = Transference.new(params_transference)
+    @transference = current_user
 
     if @transference.save
       update_account_balance!
